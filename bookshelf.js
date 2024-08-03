@@ -5,4 +5,4 @@
  * http://bookshelfjs.org
  *
  */
-module.exports = require('./lib/bookshelf');
+module.exports = require("./lib/bookshelf");
