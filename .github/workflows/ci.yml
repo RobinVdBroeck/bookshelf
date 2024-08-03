@@ -6,7 +6,10 @@ on:
   pull_request:
     branches: [master]
 
-services:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
       postgres:
         image: postgres:9
         ports:
@@ -34,25 +37,21 @@ services:
           --health-timeout 5s
           --health-retries 5
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-
     strategy:
       matrix:
         node-version: [6.x, 8.x, 10.x, 12.x, 14.x, 16.x, 18.x, 20.x]
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: Set up Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v2
-      with:
-        node-version: ${{ matrix.node-version }}
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
 
-    - name: Install dependencies
-      run: npm install
+      - name: Install dependencies
+        run: npm install
 
-    - name: Run tests
-      run: npm test
+      - name: Run tests
+        run: npm test
