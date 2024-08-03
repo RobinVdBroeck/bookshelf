@@ -1,91 +1,87 @@
 {
-  "name": "bookshelf",
-  "version": "1.2.0",
-  "description": "A lightweight ORM for PostgreSQL, MySQL, and SQLite3",
-  "packageManager": "npm@6.14.18+sha512.a774a3a927214ae35052a6c9060c1dbf42f73ba6ca91a49f42b43326cb2436934a2e0d20dfb739c535c55744aa4e55fd196be81b10442d524c456ab427ca1a2c",
-  "main": "bookshelf.js",
-  "scripts": {
-    "format": "prettier --write \"{lib,scripts,test}/**/*.js\"",
-    "lint": "eslint bookshelf.js lib/",
-    "cover": "npm run lint && nyc mocha --check-leaks -t 10000 -b",
-    "test": "npm run lint && mocha --check-leaks -t 10000 -b",
-    "jsdoc": "./scripts/jsdoc.sh",
-    "postpublish": "./scripts/postpublish.sh"
-  },
-  "homepage": "https://bookshelfjs.org",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/bookshelf/bookshelf.git"
-  },
-  "keywords": [
-    "orm",
-    "mysql",
-    "postgresql",
-    "sqlite",
-    "datamapper",
-    "active record"
-  ],
-  "dependencies": {
-    "bluebird": "^3.7.2",
-    "create-error": "~0.3.1",
-    "inflection": "^1.12.0",
-    "lodash": "^4.17.15"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.{js,json}": [
-      "prettier --write",
-      "git add"
-    ]
-  },
-  "devDependencies": {
-    "bookshelf-jsdoc-theme": "^1.0.1",
-    "chai": "^4.2.0",
-    "eslint": "^6.8.0",
-    "eslint-config-prettier": "^6.10.0",
-    "eslint-plugin-prettier": "^3.1.2",
-    "husky": "^3.0.5",
-    "jsdoc": "^3.6.3",
-    "knex": "~0.21.0",
-    "lint-staged": "^9.2.5",
-    "mocha": "^7.1.2",
-    "mysql": "^2.18.1",
-    "nyc": "^15.0.0",
-    "pg": "^8.0.3",
-    "prettier": "^1.18.2",
-    "sinon": "^8.1.1",
-    "sinon-chai": "^3.3.0",
-    "sqlite3": "^5.0.0",
-    "uuid": "^3.3.3"
-  },
-  "peerDependencies": {
-    "knex": ">=0.15.0 <0.22.0"
-  },
-  "author": {
-    "name": "Tim Griesser",
-    "url": "https://github.com/tgriesser"
-  },
-  "contributors": [
-    {
-      "name": "Edward Greve",
-      "url": "https://github.com/anyong"
-    },
-    {
-      "name": "Rhys van der Waerden",
-      "url": "https://github.com/rhys-vdw"
-    },
-    {
-      "name": "Ricardo Graça",
-      "url": "https://github.com/ricardograca"
-    }
-  ],
-  "license": "MIT",
-  "readmeFilename": "README.md",
-  "engines": {
-    "node": ">=14"
-  }
+	"name": "bookshelf",
+	"version": "1.2.0",
+	"description": "A lightweight ORM for PostgreSQL, MySQL, and SQLite3",
+	"packageManager": "npm@6.14.18+sha512.a774a3a927214ae35052a6c9060c1dbf42f73ba6ca91a49f42b43326cb2436934a2e0d20dfb739c535c55744aa4e55fd196be81b10442d524c456ab427ca1a2c",
+	"main": "bookshelf.js",
+	"scripts": {
+		"format": "biome format .",
+		"format:write": "biome format --write .",
+		"lint": "eslint bookshelf.js lib/",
+		"cover": "npm run lint && nyc mocha --check-leaks -t 10000 -b",
+		"test": "npm run lint && mocha --check-leaks -t 10000 -b",
+		"jsdoc": "./scripts/jsdoc.sh",
+		"postpublish": "./scripts/postpublish.sh"
+	},
+	"homepage": "https://bookshelfjs.org",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/bookshelf/bookshelf.git"
+	},
+	"keywords": [
+		"orm",
+		"mysql",
+		"postgresql",
+		"sqlite",
+		"datamapper",
+		"active record"
+	],
+	"dependencies": {
+		"bluebird": "^3.7.2",
+		"create-error": "~0.3.1",
+		"inflection": "^1.12.0",
+		"lodash": "^4.17.15"
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "lint-staged"
+		}
+	},
+	"lint-staged": {
+		"*.{js,json}": ["biome format --write", "git add"]
+	},
+	"devDependencies": {
+		"@biomejs/biome": "1.8.3",
+		"bookshelf-jsdoc-theme": "^1.0.1",
+		"chai": "^4.2.0",
+		"eslint": "^6.8.0",
+		"husky": "^3.0.5",
+		"jsdoc": "^3.6.3",
+		"knex": "~0.21.0",
+		"lint-staged": "^9.2.5",
+		"mocha": "^7.1.2",
+		"mysql": "^2.18.1",
+		"nyc": "^15.0.0",
+		"pg": "^8.0.3",
+		"sinon": "^8.1.1",
+		"sinon-chai": "^3.3.0",
+		"sqlite3": "^5.0.0",
+		"uuid": "^3.3.3"
+	},
+	"peerDependencies": {
+		"knex": ">=0.15.0 <0.22.0"
+	},
+	"author": {
+		"name": "Tim Griesser",
+		"url": "https://github.com/tgriesser"
+	},
+	"contributors": [
+		{
+			"name": "Edward Greve",
+			"url": "https://github.com/anyong"
+		},
+		{
+			"name": "Rhys van der Waerden",
+			"url": "https://github.com/rhys-vdw"
+		},
+		{
+			"name": "Ricardo Graça",
+			"url": "https://github.com/ricardograca"
+		}
+	],
+	"license": "MIT",
+	"readmeFilename": "README.md",
+	"engines": {
+		"node": ">=14"
+	}
 }
