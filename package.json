@@ -7,7 +7,7 @@
 	"scripts": {
 		"format": "biome format .",
 		"format:write": "biome format --write .",
-		"lint": "eslint bookshelf.js lib/",
+		"lint": "biome lint .",
 		"cover": "npm run lint && nyc mocha --check-leaks -t 10000 -b",
 		"test": "npm run lint && mocha --check-leaks -t 10000 -b",
 		"jsdoc": "./scripts/jsdoc.sh",
@@ -44,7 +44,6 @@
 		"@biomejs/biome": "1.8.3",
 		"bookshelf-jsdoc-theme": "^1.0.1",
 		"chai": "^4.2.0",
-		"eslint": "^6.8.0",
 		"husky": "^3.0.5",
 		"jsdoc": "^3.6.3",
 		"knex": "~0.21.0",

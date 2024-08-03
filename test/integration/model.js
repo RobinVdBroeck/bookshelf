@@ -41,7 +41,7 @@ module.exports = function (bookshelf) {
 				it("contains all the attributes set on the model as the second argument", function () {
 					var admin = new Models.Admin({ username: "bob" });
 
-					admin.on("creating", function (model, attributes) {
+					admin.on("creating", function (_model, attributes) {
 						expect(attributes).to.include({
 							username: "bob",
 							password: "supersecret",
@@ -56,7 +56,7 @@ module.exports = function (bookshelf) {
 				it("contains all the attributes set on the model as the second argument", function () {
 					var admin = new Models.Admin({ username: "bob" });
 
-					admin.on("updating", function (model, attributes) {
+					admin.on("updating", function (_model, attributes) {
 						expect(attributes).to.include({
 							username: "bob",
 							password: "supersecret",
@@ -72,7 +72,7 @@ module.exports = function (bookshelf) {
 				it("contains only the attributes passed to save() as the second argument if using the patch: true option", function () {
 					var admin = new Models.Admin();
 
-					admin.on("updating", function (model, attributes) {
+					admin.on("updating", function (_model, attributes) {
 						expect(attributes)
 							.to.include({ password: "supersecret" })
 							.but.not.include({ username: "bob" });
@@ -100,7 +100,7 @@ module.exports = function (bookshelf) {
 				it("passes the column definitions to fetch as second argument to the listener", function () {
 					var site = new Models.Site();
 
-					site.on("fetching:collection", function (collection, columns) {
+					site.on("fetching:collection", function (_collection, columns) {
 						expect(columns).to.be.an.instanceof(Array);
 						expect(columns.length).to.be.above(0);
 					});
@@ -113,7 +113,7 @@ module.exports = function (bookshelf) {
 
 					site.on(
 						"fetching:collection",
-						function (collection, columns, options) {
+						function (_collection, _columns, options) {
 							expect(options).to.be.an.instanceof(Object);
 							expect(options).to.have.property("query");
 						},
@@ -138,7 +138,7 @@ module.exports = function (bookshelf) {
 				it("passes the fetched columns as second argument to the listener", function () {
 					var site = new Models.Site();
 
-					site.on("fetched:collection", function (collection, columns) {
+					site.on("fetched:collection", function (_collection, columns) {
 						expect(columns).to.be.an.instanceof(Array);
 						expect(columns.length).to.be.above(0);
 					});
@@ -151,7 +151,7 @@ module.exports = function (bookshelf) {
 
 					site.on(
 						"fetching:collection",
-						function (collection, columns, options) {
+						function (_collection, _columns, options) {
 							expect(options).to.be.an.instanceof(Object);
 							expect(options).to.have.property("query");
 						},
@@ -319,7 +319,7 @@ module.exports = function (bookshelf) {
 				var TestModel = bookshelf.Model.extend({
 					idAttribute: "test_id",
 					parse: function (attrs) {
-						return _.mapKeys(attrs, function (val, key) {
+						return _.mapKeys(attrs, function (_val, key) {
 							return _.camelCase(key);
 						});
 					},
@@ -343,7 +343,7 @@ module.exports = function (bookshelf) {
 				it("allows overriding the model level {require: false} option", function () {
 					return new FalseAuthor({ id: 200 })
 						.fetch({ require: true })
-						.then((model) => {
+						.then((_model) => {
 							assert.fail(
 								"Expected the promise to be rejected but it resolved",
 							);
@@ -357,7 +357,7 @@ module.exports = function (bookshelf) {
 				it("rejects with NotFoundError by default", function () {
 					return new Models.Author({ id: 200 })
 						.fetch()
-						.then((model) => {
+						.then((_model) => {
 							assert.fail(
 								"Expected the promise to be rejected but it resolved",
 							);
@@ -436,7 +436,7 @@ module.exports = function (bookshelf) {
 				var qb = model.resetQuery().query();
 				equal(_.filter(qb._statements, { grouping: "where" }).length, 0);
 
-				var q = model.query(function (qb) {
+				var q = model.query(function (_qb) {
 					this.where({ id: 1 }).orWhere("id", ">", "10");
 				});
 
@@ -581,7 +581,7 @@ module.exports = function (bookshelf) {
 
 			it("allows access to the query builder on the options object in the fetching event", function () {
 				var model = new Site({ id: 1 });
-				model.on("fetching", function (model, columns, options) {
+				model.on("fetching", function (_model, _columns, options) {
 					assert(typeof options.query.whereIn === "function");
 				});
 
@@ -631,7 +631,7 @@ module.exports = function (bookshelf) {
 			it("rejects with an error if no record exists", function () {
 				return new Author({ id: 200 })
 					.fetch()
-					.then((model) => {
+					.then((_model) => {
 						assert.fail("Expected the promise to be rejected but it resolved");
 					})
 					.catch((error) => {
@@ -1044,7 +1044,7 @@ module.exports = function (bookshelf) {
 					Site.prototype.initialize = function () {
 						this.on(
 							"fetching:collection",
-							function (collection, columns, options) {
+							function (_collection, _columns, options) {
 								allOptions.push(_.omit(options, "query"));
 							},
 						);
@@ -1080,7 +1080,7 @@ module.exports = function (bookshelf) {
 					Site.prototype.initialize = function () {
 						this.on(
 							"fetching:collection",
-							function (collection, columns, options) {
+							function (_collection, _columns, options) {
 								allOptions.push(_.omit(options, "query"));
 							},
 						);
@@ -1443,7 +1443,7 @@ module.exports = function (bookshelf) {
 					initialize: function () {
 						this.on("saving", this._generateId);
 					},
-					_generateId: function (model, attrs, options) {
+					_generateId: function (model, _attrs, _options) {
 						if (model.isNew()) {
 							model.set(model.idAttribute, uuidval);
 						}
@@ -1552,7 +1552,7 @@ module.exports = function (bookshelf) {
 					sync.query = m.query();
 					return sync;
 				};
-				m.on("destroying", function (model, options) {
+				m.on("destroying", function (_model, options) {
 					assert(typeof options.query.whereIn === "function");
 				});
 

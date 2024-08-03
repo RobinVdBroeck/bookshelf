@@ -10,7 +10,7 @@
 	},
 	"customizations": {
 		"vscode": {
-			"extensions": ["biomejs.biome", "dbaeumer.vscode-eslint"]
+			"extensions": ["biomejs.biome"]
 		}
 	}
 }

@@ -175,7 +175,7 @@ module.exports = function (bookshelf) {
 					.authors()
 					.query({ where: { id: 40 } })
 					.fetchOne()
-					.then((model) => {
+					.then((_model) => {
 						fail("Expected the promise to be rejected but it resolved");
 					})
 					.catch((error) => {
@@ -188,7 +188,7 @@ module.exports = function (bookshelf) {
 					.authors()
 					.query({ where: { id: 40 } })
 					.fetchOne()
-					.then((model) => {
+					.then((_model) => {
 						fail("Expected the promise to be rejected but it resolved");
 					})
 					.catch((error) => {

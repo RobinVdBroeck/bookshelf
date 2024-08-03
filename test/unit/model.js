@@ -19,7 +19,7 @@ module.exports = function () {
 					notStrictEqual(options, opts);
 
 					return {
-						insert: function (opts) {
+						insert: function (_opts) {
 							return Promise.resolve({});
 						},
 					};

@@ -230,7 +230,7 @@ module.exports = function (Bookshelf) {
 						initialize: function () {
 							this.on(
 								"fetching fetching:collection",
-								function (model, columns, options) {
+								function (_model, _columns, options) {
 									if (!options.withRelated) options.withRelated = [];
 									options.withRelated.push("site");
 								},
@@ -540,7 +540,7 @@ module.exports = function (Bookshelf) {
 									}),
 							]);
 						})
-						.then(function (resp) {
+						.then(function (_resp) {
 							return Promise.all([
 								new Site({ id: 1 }).related("admins").fetch(),
 								new Site({ id: 2 }).related("admins").fetch(),
@@ -548,10 +548,10 @@ module.exports = function (Bookshelf) {
 						})
 						.spread(function (admins1, admins2) {
 							return Promise.all([
-								admins1.detach(admin1_id).then(function (c) {
+								admins1.detach(admin1_id).then(function (_c) {
 									expect(admins1).to.have.length(1);
 								}),
-								admins2.detach().then(function (c) {
+								admins2.detach().then(function (_c) {
 									expect(admins2).to.have.length(0);
 								}),
 								admins1.on("detached", function (c) {
@@ -598,7 +598,7 @@ module.exports = function (Bookshelf) {
 								}),
 							]);
 						})
-						.then(function (resp) {
+						.then(function (_resp) {
 							expect(site1.related("admins")).to.have.length(2);
 							expect(site2.related("admins")).to.have.length(1);
 						})
@@ -622,7 +622,7 @@ module.exports = function (Bookshelf) {
 									}),
 							]);
 						})
-						.then(function (resp) {
+						.then(function (_resp) {
 							return Promise.all([
 								new Site({ id: 1 }).related("admins").fetch(),
 								new Site({ id: 2 }).related("admins").fetch(),
@@ -630,10 +630,10 @@ module.exports = function (Bookshelf) {
 						})
 						.spread(function (admins1, admins2) {
 							return Promise.all([
-								admins1.detach(admin1_id).then(function (c) {
+								admins1.detach(admin1_id).then(function (_c) {
 									expect(admins1).to.have.length(1);
 								}),
-								admins2.detach().then(function (c) {
+								admins2.detach().then(function (_c) {
 									expect(admins2).to.have.length(0);
 								}),
 								admins1.on("detached", function (c) {
@@ -699,7 +699,7 @@ module.exports = function (Bookshelf) {
 					var admin1 = new Admin({ username: "updatetest", password: "test" });
 					var admin2 = new Admin({ username: "updatetest2", password: "test" });
 					return Promise.all([admin1.save(), admin2.save()]).then(
-						function (admin) {
+						function (_admin) {
 							admin1_id = admin1.id;
 							admin2_id = admin2.id;
 							return new Site({ id: 1 })
@@ -757,7 +757,7 @@ module.exports = function (Bookshelf) {
 					return new Site({ id: 99999 })
 						.admins()
 						.updatePivot({ item: "testvalue" }, { require: true })
-						.then(function (relation) {
+						.then(function (_relation) {
 							throw new Error("this should not happen");
 						})
 						.catch(function (err) {
@@ -1225,7 +1225,7 @@ module.exports = function (Bookshelf) {
 			it("should not run a query for eagerly loaded `belongsTo` relations if the foreign key is null", function () {
 				var a = new Author({ id: 1 });
 
-				return a.fetch({ withRelated: "site" }).then(function (model) {
+				return a.fetch({ withRelated: "site" }).then(function (_model) {
 					equal(siteSyncCount, 0);
 				});
 			});
@@ -1259,7 +1259,7 @@ module.exports = function (Bookshelf) {
 			// the overridden JoinModel.
 			function initializeModelsForLifecycleEvent(lifecycleEvent) {
 				JoinModel = JoinModel.extend({
-					initialize: (function (v) {
+					initialize: (function (_v) {
 						return function () {
 							this.on(lifecycleEvent, function () {
 								throw new Error(
@@ -1299,16 +1299,16 @@ module.exports = function (Bookshelf) {
 						// fetching, fetched
 						return [left, right, right.lefts().fetch()];
 					})
-					.spread(function (left, right, lefts) {
+					.spread(function (left, right, _lefts) {
 						// updating, updated
 						return [left, right, left.rights().updatePivot({})];
 					})
-					.spread(function (left, right, relationship) {
+					.spread(function (_left, right, _relationship) {
 						return new LeftModel().save().then(function (left) {
 							return [left, right, right.lefts().attach(left)];
 						});
 					})
-					.spread(function (left, right, relationship) {
+					.spread(function (left, right, _relationship) {
 						// destroying, destroyed
 						return left.rights().detach(right);
 					});
@@ -1487,7 +1487,7 @@ module.exports = function (Bookshelf) {
 		describe("PR #2059 - opts.query on fetching with morphTo", function () {
 			it("should correctly set query on fetching with morphTo", async function () {
 				const { Photo } = objs.generateEventModels({
-					fetching: function (table, model, columns, options) {
+					fetching: function (table, _model, _columns, options) {
 						// Check that options.query actually queries this table
 						equal(options.query._single.table, table);
 					},

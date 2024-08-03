@@ -5,5 +5,52 @@
 	},
 	"formatter": {
 		"enabled": true
-	}
+	},
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"recommended": false,
+			"complexity": {
+				"useArrowFunction": "off"
+			},
+			"correctness": {
+				"noConstAssign": "error",
+				"noUndeclaredVariables": "error",
+				"noUnusedVariables": "error"
+			},
+			"style": {
+				"useBlockStatements": "off",
+				"useConst": "warn"
+			},
+			"suspicious": {
+				"noConsoleLog": "error"
+			}
+		}
+	},
+	"javascript": {
+		"globals": ["arguments"]
+	},
+	"overrides": [
+		{
+			"include": ["test/**/*.js"],
+			"javascript": {
+				"globals": [
+					"after",
+					"afterEach",
+					"before",
+					"beforeEach",
+					"context",
+					"describe",
+					"expect",
+					"it",
+					"sinon"
+				]
+			},
+			"linter": {
+				"rules": {
+					"suspicious": { "noConsoleLog": "off" }
+				}
+			}
+		}
+	]
 }
