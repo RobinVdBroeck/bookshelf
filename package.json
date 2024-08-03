@@ -8,8 +8,8 @@
 		"format": "biome format .",
 		"format:write": "biome format --write .",
 		"lint": "biome lint .",
-		"cover": "npm run lint && nyc mocha --check-leaks -t 10000 -b",
-		"test": "npm run lint && mocha --check-leaks -t 10000 -b",
+		"cover": "nyc mocha --check-leaks -t 10000 -b",
+		"test": "mocha --check-leaks -t 10000 -b",
 		"jsdoc": "./scripts/jsdoc.sh",
 		"postpublish": "./scripts/postpublish.sh"
 	},
