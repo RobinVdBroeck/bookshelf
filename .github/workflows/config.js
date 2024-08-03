@@ -4,14 +4,14 @@ module.exports = {
     user: process.env.MYSQL_USER,
     password: process.env.MYSQL_PASSWORD,
     encoding: 'utf8',
-    host: 'mysql'
+    host: 'localhost'
   },
 
   postgres: {
     database: 'bookshelf_test',
     user: process.env.POSTGRES_USER,
     password: process.env.POSTGRES_PASSWORD,
-    host: 'postgres',
+    host: 'localhost',
     charset: 'utf8',
     ssl: false
   },
