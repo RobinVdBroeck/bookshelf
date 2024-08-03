@@ -2,6 +2,13 @@
   "dockerComposeFile": "docker-compose.yml",
   "service": "devcontainer",
   "workspaceFolder": "/workspaces/",
+  "postAttachCommand": "corepack enable && corepack npm install",
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "20"
+    }
+  },
+  // "updateContentCommand": "corepack prepare && corepack npm install",
   "customizations": {
     "vscode": {
       "extensions": ["esbenp.prettier-vscode", "dbaeumer.vscode-eslint"]
