@@ -33,7 +33,7 @@ module.exports = function (Bookshelf) {
 		});
 
 		it("can modify the `Collection` model returned by `Model#collection`", function () {
-			var testPlugin = function (bookshelf, options) {
+			var testPlugin = function (bookshelf, _options) {
 				bookshelf.Collection = bookshelf.Collection.extend({
 					test: "test",
 				});

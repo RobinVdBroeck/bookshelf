@@ -11,7 +11,7 @@ Promise.onPossiblyUnhandledRejection(function (err) {
 });
 
 // http://bluebirdjs.com/docs/api/error-management-configuration.html#global-rejection-events
-process.on("unhandledRejection", function (reason, promise) {
+process.on("unhandledRejection", function (reason, _promise) {
 	console.error(reason);
 });
 
