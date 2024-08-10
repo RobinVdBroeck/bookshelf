@@ -27,10 +27,10 @@ module.exports = function (Bookshelf) {
 		},
 	});
 
-	var MySQL = require("../../bookshelf")(mysql);
-	var PostgreSQL = require("../../bookshelf")(pg);
-	var SQLite3 = require("../../bookshelf")(sqlite3);
-	var Swapped = require("../../bookshelf")(
+	var MySQL = require("../../lib/bookshelf")(mysql);
+	var PostgreSQL = require("../../lib/bookshelf")(pg);
+	var SQLite3 = require("../../lib/bookshelf")(sqlite3);
+	var Swapped = require("../../lib/bookshelf")(
 		Knex({ client: "sqlite3", useNullAsDefault: true }),
 	);
 	Swapped.knex = sqlite3;
