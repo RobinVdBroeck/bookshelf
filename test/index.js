@@ -1,5 +1,5 @@
 var Promise = require("bluebird");
-var Bookshelf = require("../bookshelf");
+var Bookshelf = require("../lib/bookshelf");
 var chai = require("chai");
 global.sinon = require("sinon");
 global.expect = chai.expect;
